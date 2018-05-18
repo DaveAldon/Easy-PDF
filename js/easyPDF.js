@@ -16,7 +16,7 @@ function easyPDF(base64, title) {
 		open: function (event, ui) {
 			$(this).before($(this).parent().find('.ui-dialog-buttonpane'));
 		},
-		width: ($(window).width() / 2),
+		width: ($(window).width()),
     modal: true,
     position: {
   		my: "top",
