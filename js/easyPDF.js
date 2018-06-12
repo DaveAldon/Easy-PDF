@@ -1,10 +1,14 @@
-function easyPDF(base64, title) {
-  // HTML definition of dialog elements
-  var dialog = '<div id="pdfDialog" title="'+title+'">'+
+function easyPDF(_base64, _title) {
+	var re = /(?<=\^PDF\^\^base64\^)(.*)(?<==)/;
+	_base64 = re.exec(_base64)[0]
+	// HTML definition of dialog elements
+	var dialog = '<div id="pdfDialog" title="'+_title+'">'+
             			'<label>Page: </label><label id="pageNum"></label>'+
             			'<canvas id="pdfview"></canvas>'+
             		'</div>';
-  $(document.body).append(dialog);
+	$('#pdfDialog').popup('hide')
+	$("div[id=pdfDialog]").remove();
+	$(document.body).append(dialog);
 
   // We need the javascript object of the canvas, not the jQuery reference
   var canvas = document.getElementById('pdfview');
@@ -16,7 +20,7 @@ function easyPDF(base64, title) {
 		open: function (event, ui) {
 			$(this).before($(this).parent().find('.ui-dialog-buttonpane'));
 		},
-		width: ($(window).width()),
+		width: ($(window).width() / 2),
     modal: true,
     position: {
   		my: "top",
@@ -53,7 +57,7 @@ function easyPDF(base64, title) {
 
   // PDF.js control
   function RenderPDF(pageNumber) {
-  	var pdfData = atob(base64);
+  	var pdfData = atob(_base64);
   	pdfjsLib.disableWorker = true;
 
   	// Get current global page number, defaults to 1
