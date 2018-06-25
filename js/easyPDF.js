@@ -1,12 +1,9 @@
 function easyPDF(_base64, _title) {
-	var re = /(?<=\^PDF\^\^base64\^)(.*)(?<==)/;
-	_base64 = re.exec(_base64)[0]
 	// HTML definition of dialog elements
 	var dialog = '<div id="pdfDialog" title="'+_title+'">'+
             			'<label>Page: </label><label id="pageNum"></label><label> of </label><label id="pageLength"></label>'+
             			'<canvas id="pdfview"></canvas>'+
             		'</div>';
-	$('#pdfDialog').popup('hide')
 	$("div[id=pdfDialog]").remove();
 	$(document.body).append(dialog);
 
