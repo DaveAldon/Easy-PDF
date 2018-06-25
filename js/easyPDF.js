@@ -3,7 +3,7 @@ function easyPDF(_base64, _title) {
 	_base64 = re.exec(_base64)[0]
 	// HTML definition of dialog elements
 	var dialog = '<div id="pdfDialog" title="'+_title+'">'+
-            			'<label>Page: </label><label id="pageNum"></label>'+
+            			'<label>Page: </label><label id="pageNum"></label><label> of </label><label id="pageLength"></label>'+
             			'<canvas id="pdfview"></canvas>'+
             		'</div>';
 	$('#pdfDialog').popup('hide')
@@ -67,7 +67,8 @@ function easyPDF(_base64, _title) {
   	var loadingTask = pdfjsLib.getDocument({data: pdfData});
   	loadingTask.promise.then(function(pdf) {
   		// Gets total page length of pdf
-  		size = pdf.numPages
+  		size = pdf.numPages;
+  		$('#pageLength').text(size);
   		// Handling for changing pages
   		if(pageNumber == 1) {
   			pageNumber = displayNum + 1;
